@@ -16,4 +16,5 @@ int main() {
 	
 	printf("Idade informada: %d. \n", idade);
 	printf("Ano informado: %d. \n", ano);
+	system("pause");
 }
