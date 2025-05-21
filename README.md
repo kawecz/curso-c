@@ -223,3 +223,191 @@ O comando `if` pode ser combinado com operadores lógicos para verificar várias
 
 Dominar o `if` é essencial para controlar o fluxo do programa e criar lógica condicional eficiente.
 <hr>
+
+##  📘Aula 4.1.1 - Operações lógicas: disjunção, conjunção e negação
+Operações lógicas são usadas para combinar ou inverter condições em C, tornando as decisões do programa mais complexas e precisas. Os principais operadores lógicos são:
+
+* Conjunção (`&&`): representa o “E”. A condição é verdadeira somente se **todas** as partes forem verdadeiras.
+* Disjunção (`||`): representa o “OU”. A condição é verdadeira se **pelo menos uma** das partes for verdadeira.
+* Negação (`!`): representa o “NÃO”. Inverte o valor lógico da condição (verdadeiro vira falso, e falso vira verdadeiro).
+
+Exemplo prático:
+
+```c
+#include <stdio.h>
+
+int main() {
+    int idade = 20;
+    int possui_carteira = 1; // 1 = verdadeiro, 0 = falso
+
+    // Conjunção: verifica se a pessoa tem idade e carteira
+    if (idade >= 18 && possui_carteira) {
+        printf("Pode dirigir.\n");
+    }
+
+    // Disjunção: verifica se é menor de idade ou não tem carteira
+    if (idade < 18 || !possui_carteira) {
+        printf("Não pode dirigir.\n");
+    }
+
+    return 0;
+}
+```
+
+Neste exemplo, usamos `&&` para garantir que ambas as condições sejam verdadeiras para permitir dirigir, e `||` junto com `!` para negar a permissão caso uma delas não seja satisfeita.
+<hr>
+
+## 📘Aula 4.2 - Domine os comandos IF e ELSE
+Os comandos `if` e `else` permitem que seu programa tome decisões e execute diferentes blocos de código dependendo de condições.
+
+A estrutura básica é:
+
+```c
+if (condição) {
+    // executa se a condição for verdadeira
+} else {
+    // executa se a condição for falsa
+}
+```
+
+O `if` verifica a condição; se for verdadeira, executa o primeiro bloco. Se for falsa, o programa pula para o bloco dentro do `else`.
+
+Exemplo:
+
+```c
+#include <stdio.h>
+
+int main() {
+    int nota = 70;
+
+    if (nota >= 60) {
+        printf("Aprovado!\n");
+    } else {
+        printf("Reprovado!\n");
+    }
+
+    return 0;
+}
+```
+
+Neste exemplo, o programa verifica se a nota é maior ou igual a 60. Se sim, imprime "Aprovado!". Caso contrário, imprime "Reprovado!".
+<hr>
+
+## 📘Aula 4.3 - Conheça o comando SWITCH-CASE
+O comando `switch-case` é uma alternativa ao `if-else` para tomar decisões baseadas no valor de uma variável. Ele facilita a leitura e organização do código quando você precisa verificar várias condições de forma direta.
+
+A estrutura básica é:
+
+```c
+switch (variável) {
+    case valor1:
+        // código para valor1
+        break;
+    case valor2:
+        // código para valor2
+        break;
+    // outros casos...
+    default:
+        // código padrão, executado se nenhum case for atendido
+}
+```
+
+O `switch` compara a variável com cada `case`. Quando encontra um valor igual, executa o código daquele bloco até encontrar o comando `break`, que interrompe o `switch`. O `default` é opcional e executa se nenhum caso for verdadeiro.
+
+Exemplo:
+
+```c
+#include <stdio.h>
+
+int main() {
+    int dia = 3;
+
+    switch (dia) {
+        case 1:
+            printf("Domingo\n");
+            break;
+        case 2:
+            printf("Segunda-feira\n");
+            break;
+        case 3:
+            printf("Terça-feira\n");
+            break;
+        default:
+            printf("Dia inválido\n");
+    }
+
+    return 0;
+}
+```
+
+Nesse exemplo, como `dia` é 3, o programa imprime "Terça-feira".
+<hr>
+
+##  📘Aula 5.1 - Domine o comando while - loops/laços condicionais
+O comando `while` cria um loop (laço) que repete um bloco de código enquanto uma condição for verdadeira. É útil quando não sabemos exatamente quantas vezes o código deve ser repetido, mas sabemos qual condição deve ser mantida.
+
+A estrutura básica é:
+
+```c
+while (condição) {
+    // código a ser repetido enquanto a condição for verdadeira
+}
+```
+
+Antes de cada repetição, a condição é verificada. Se for verdadeira, o código dentro do laço é executado. Quando a condição se tornar falsa, o loop para.
+
+Exemplo simples:
+
+```c
+#include <stdio.h>
+
+int main() {
+    int contador = 1;
+
+    while (contador <= 5) {
+        printf("Contador: %d\n", contador);
+        contador++;
+    }
+
+    return 0;
+}
+```
+
+Neste exemplo, o programa imprime os números de 1 a 5, aumentando o contador a cada repetição. Quando `contador` passa de 5, o laço termina.
+
+É importante garantir que a condição eventualmente se torne falsa, para evitar loops infinitos que travam o programa.
+<hr>
+
+##  📘Aula 5.2 - Conheça os comandos do & while
+O comando `do-while` é um tipo de loop em C que executa o bloco de código **pelo menos uma vez** e depois verifica a condição para continuar repetindo. Diferente do `while`, que verifica a condição antes da primeira execução, o `do-while` garante que o código rode uma vez, mesmo que a condição já seja falsa.
+
+A estrutura básica é:
+
+```c
+do {
+    // código a ser executado
+} while (condição);
+```
+
+Após executar o bloco, a condição é avaliada. Se for verdadeira, o loop continua; se for falsa, o loop termina.
+
+Exemplo simples:
+
+```c
+#include <stdio.h>
+
+int main() {
+    int contador = 1;
+
+    do {
+        printf("Contador: %d\n", contador);
+        contador++;
+    } while (contador <= 5);
+
+    return 0;
+}
+```
+
+Neste exemplo, o programa imprime os números de 1 a 5. Mesmo que a condição já fosse falsa no início, o código dentro do `do` seria executado pelo menos uma vez.
+
+O `do-while` é útil quando você precisa garantir que o código execute antes de verificar a condição, como em menus que precisam aparecer pelo menos uma vez.
