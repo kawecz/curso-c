@@ -411,3 +411,213 @@ int main() {
 Neste exemplo, o programa imprime os números de 1 a 5. Mesmo que a condição já fosse falsa no início, o código dentro do `do` seria executado pelo menos uma vez.
 
 O `do-while` é útil quando você precisa garantir que o código execute antes de verificar a condição, como em menus que precisam aparecer pelo menos uma vez.
+<hr>
+
+### 📘Aula 5.3 - Aprenda o comando for 
+
+---
+
+### 📌 Introdução
+
+O comando `for` é utilizado para repetir um bloco de código **um número conhecido de vezes**. Ele é ideal quando sabemos de antemão **quantas vezes** um laço deve se repetir. Por isso, também é chamado de **laço de repetição contado**.
+
+---
+
+### 🧱 Estrutura do `for`
+
+```c
+for (inicialização; condição; incremento) {
+    // bloco de código a ser repetido
+}
+```
+
+| Parte         | Função                                                                                      |
+| ------------- | ------------------------------------------------------------------------------------------- |
+| Inicialização | Executa uma vez no início do laço (normalmente usada para declarar a variável de controle). |
+| Condição      | Verificada antes de cada iteração. Se for verdadeira, o laço continua.                      |
+| Incremento    | Executado ao final de cada iteração (geralmente incrementa o contador).                     |
+
+---
+
+### ✅ Exemplo 1: Contando de 1 até 5
+
+```c
+#include <stdio.h>
+
+int main() {
+    for (int i = 1; i <= 5; i++) {
+        printf("Valor de i: %d\n", i);
+    }
+    return 0;
+}
+```
+
+#### 🖨️ Saída:
+
+```
+Valor de i: 1
+Valor de i: 2
+Valor de i: 3
+Valor de i: 4
+Valor de i: 5
+```
+
+---
+
+### 🔁 Exemplo 2: Contagem decrescente
+
+```c
+#include <stdio.h>
+
+int main() {
+    for (int i = 5; i >= 1; i--) {
+        printf("Contagem: %d\n", i);
+    }
+    return 0;
+}
+```
+
+#### 🖨️ Saída:
+
+```
+Contagem: 5
+Contagem: 4
+Contagem: 3
+Contagem: 2
+Contagem: 1
+```
+
+---
+
+### 🧠 Observações importantes
+
+* Todas as 3 partes do `for` são opcionais, mas os `;` devem estar presentes:
+
+```c
+for (;;) {
+    // laço infinito
+}
+```
+
+* A variável `i` declarada dentro do `for` tem **escopo local** ao laço. Ela deixa de existir fora dele.
+
+---
+
+### 🧮 Tabela de comparação: `for`, `while` e `do...while`
+
+| Característica | `for`              | `while`           | `do...while`              |
+| -------------- | ------------------ | ----------------- | ------------------------- |
+| Uso comum      | Contagem conhecida | Condição genérica | Executar ao menos uma vez |
+| Verificação    | Antes do bloco     | Antes do bloco    | Depois do bloco           |
+| Sintaxe        | Compacta e clara   | Mais flexível     | Mais garantida            |
+
+---
+
+### 🧠 Conclusão
+
+O `for` é uma das estruturas mais utilizadas em programação por sua clareza e controle. Ele facilita a repetição de comandos de forma organizada, especialmente quando sabemos **exatamente quantas vezes** a repetição deve ocorrer. Dominar seu uso é essencial para qualquer programador C.
+<hr>
+
+## 📘Aula 5.4 - Conheça os comandos de Controle de Fluxo break e continue 
+
+## Introdução
+Em C, os comandos `break` e `continue` são usados para controlar o fluxo de execução em loops (`for`, `while`, `do-while`) e em estruturas `switch`.
+
+## Comando `break`
+- **Função**: Interrompe imediatamente a execução do loop ou do `switch`.
+- **Uso**: Sai do loop quando uma condição é satisfeita.
+
+### Exemplo com `break` em loop:
+```c
+#include <stdio.h>
+
+int main() {
+    for (int i = 0; i < 10; i++) {
+        if (i == 5) {
+            break; // Sai do loop quando i == 5
+        }
+        printf("%d\n", i);
+    }
+    return 0;
+}
+```
+**Saída**:
+```
+0
+1
+2
+3
+4
+```
+
+### Exemplo com `break` em switch:
+```c
+#include <stdio.h>
+
+int main() {
+    int opcao = 2;
+    
+    switch (opcao) {
+        case 1:
+            printf("Opção 1\n");
+            break;
+        case 2:
+            printf("Opção 2\n");
+            break; // Sai do switch após executar este case
+        case 3:
+            printf("Opção 3\n");
+            break;
+        default:
+            printf("Opção inválida\n");
+    }
+    return 0;
+}
+```
+**Saída**:
+```
+Opção 2
+```
+
+## Comando `continue`
+- **Função**: Pula a iteração atual e vai para a próxima iteração do loop.
+- **Uso**: Ignora parte do código em uma condição específica, mas continua o loop.
+
+### Exemplo com `continue`:
+```c
+#include <stdio.h>
+
+int main() {
+    for (int i = 0; i < 10; i++) {
+        if (i % 2 == 0) {
+            continue; // Pula números pares
+        }
+        printf("%d\n", i);
+    }
+    return 0;
+}
+```
+**Saída**:
+```
+1
+3
+5
+7
+9
+```
+
+## Diferenças Principais
+| Comando  | Efeito                                                                 |
+|----------|-----------------------------------------------------------------------|
+| `break`  | Sai completamente do loop ou do `switch`                             |
+| `continue` | Pula apenas a iteração atual e continua no próximo ciclo do loop    |
+
+## Aplicações Práticas
+1. **`break`**:
+   - Parar um loop quando um valor é encontrado.
+   - Sair de um menu de opções (`switch`).
+
+2. **`continue`**:
+   - Ignorar valores específicos durante um processamento.
+   - Pular iterações desnecessárias para economizar tempo.
+
+Estes comandos são essenciais para um controle mais preciso de fluxo em programas C.
