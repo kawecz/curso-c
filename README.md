@@ -621,3 +621,111 @@ int main() {
    - Pular iterações desnecessárias para economizar tempo.
 
 Estes comandos são essenciais para um controle mais preciso de fluxo em programas C.
+<hr>
+
+## 📘Aula 6.1 - Domine Vetores (Arrays)
+## O que são Vetores (Arrays)?
+
+Vetores, também conhecidos como arrays, são estruturas de dados que armazenam uma coleção de elementos do **mesmo tipo** em posições contíguas de memória.
+
+### Características principais:
+- Todos os elementos são do mesmo tipo (int, float, char, etc.)
+- Tamanho fixo (definido na declaração)
+- Acesso direto aos elementos através de índices
+- Índices começam em 0 (zero)
+
+## Declaração de Vetores
+
+Sintaxe básica:
+```c
+tipo nome_do_vetor[tamanho];
+```
+
+Exemplos:
+```c
+int numeros[10];        // Vetor de 10 inteiros
+float notas[5];         // Vetor de 5 floats
+char vogais[5];         // Vetor de 5 caracteres
+```
+
+## Inicialização de Vetores
+
+Podemos inicializar um vetor na declaração:
+
+```c
+// Inicialização explícita
+int numeros[5] = {10, 20, 30, 40, 50};
+
+// Inicialização com tamanho implícito
+float precos[] = {1.99, 2.50, 9.99}; // Tamanho 3
+
+// Inicialização parcial (restante será zero)
+int valores[5] = {10, 20}; // [10, 20, 0, 0, 0]
+```
+
+## Acessando Elementos
+
+Os elementos são acessados através de índices (entre colchetes):
+
+```c
+int idades[5] = {25, 30, 22, 40, 18};
+
+printf("%d", idades[0]); // Imprime 25 (primeiro elemento)
+idades[2] = 23;          // Altera o terceiro elemento para 23
+```
+
+## Exemplo Prático
+
+```c
+#include <stdio.h>
+
+int main() {
+    // Declara e inicializa um vetor
+    float notas[4] = {7.5, 8.0, 6.5, 9.0};
+    float soma = 0, media;
+    
+    // Calcula a soma das notas
+    for(int i = 0; i < 4; i++) {
+        soma += notas[i];
+    }
+    
+    // Calcula a média
+    media = soma / 4;
+    
+    printf("Média: %.2f\n", media);
+    
+    return 0;
+}
+```
+
+## Cuidados Importantes
+
+1. **Índices inválidos**: Acessar posições fora do vetor pode causar comportamentos inesperados
+   ```c
+   int vetor[3] = {1, 2, 3};
+   printf("%d", vetor[5]); // Comportamento indefinido!
+   ```
+
+2. **Tamanho fixo**: O tamanho do vetor não pode ser alterado após a declaração
+
+3. **Verificação de limites**: C não verifica automaticamente se os índices estão dentro dos limites
+
+## Vetores e Funções
+
+Podemos passar vetores como parâmetros para funções:
+
+```c
+void imprimirVetor(int vet[], int tamanho) {
+    for(int i = 0; i < tamanho; i++) {
+        printf("%d ", vet[i]);
+    }
+}
+
+int main() {
+    int numeros[5] = {1, 3, 5, 7, 9};
+    imprimirVetor(numeros, 5);
+    return 0;
+}
+```
+
+Observação: Quando passamos um vetor para uma função, na verdade estamos passando um ponteiro para seu primeiro elemento. Portanto, alterações no vetor dentro da função afetam o vetor original.
