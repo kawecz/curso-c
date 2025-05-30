@@ -729,3 +729,177 @@ int main() {
 ```
 
 Observação: Quando passamos um vetor para uma função, na verdade estamos passando um ponteiro para seu primeiro elemento. Portanto, alterações no vetor dentro da função afetam o vetor original.
+<hr>
+
+## 📘Aula 6.2 - Strings: trabalhando com dados de texto
+
+## O que são Strings em C?
+
+Em C, strings são sequências de caracteres armazenadas em arrays de caracteres (vetores do tipo `char`). Diferente de outras linguagens, C não possui um tipo de dado específico para strings - elas são implementadas como arrays de caracteres terminados pelo caractere nulo `'\0'`.
+
+## Declaração de Strings
+
+Existem várias formas de declarar strings em C:
+
+```c
+// Forma 1: Declaração com tamanho fixo
+char nome[50]; // String que pode armazenar até 49 caracteres + '\0'
+
+// Forma 2: Inicialização direta
+char saudacao[] = "Olá, mundo!"; // O compilador calcula o tamanho automaticamente
+
+// Forma 3: Usando ponteiro
+char *mensagem = "Bem-vindo ao C"; // String literal (armazenada em segmento read-only)
+```
+
+## Funções Básicas para Manipulação de Strings
+
+A biblioteca `<string.h>` fornece várias funções essenciais:
+
+### strlen() - Tamanho da string
+```c
+size_t strlen(const char *str);
+```
+- Retorna o número de caracteres antes do '\0'
+- Exemplo:
+  ```c
+  char texto[] = "ABCDE";
+  size_t tam = strlen(texto); // tam = 5
+  ```
+
+### strcpy() - Copiar strings
+```c
+char *strcpy(char *dest, const char *src);
+```
+- Copia a string `src` para `dest` (incluindo o '\0')
+- Versão segura: `strncpy()` que limita o número de caracteres copiados
+- Exemplo:
+  ```c
+  char destino[20];
+  char origem[] = "Texto exemplo";
+  strncpy(destino, origem, sizeof(destino) - 1);
+  destino[sizeof(destino) - 1] = '\0'; // Garante terminação
+  ```
+
+### strcat() - Concatenar strings
+```c
+char *strcat(char *dest, const char *src);
+```
+- Adiciona `src` ao final de `dest`
+- Versão segura: `strncat()`
+- Exemplo:
+  ```c
+  char nome[50] = "João";
+  strncat(nome, " Silva", sizeof(nome) - strlen(nome) - 1);
+  ```
+
+### strcmp() - Comparar strings
+```c
+int strcmp(const char *str1, const char *str2);
+```
+- Compara strings lexicograficamente
+- Retorna 0 se iguais, <0 se str1 < str2, >0 se str1 > str2
+- Versão para localidades: `strcoll()`
+- Exemplo:
+  ```c
+  if(strcmp(senha, "secreta123") == 0) {
+      printf("Acesso permitido!\n");
+  }
+  ```
+
+## Internacionalização com locale.h
+
+Para trabalhar com caracteres internacionais e formatação regional:
+
+```c
+#include <locale.h>
+
+// Configura para a localidade padrão do sistema (suporta acentos, ç, etc.)
+setlocale(LC_ALL, "");
+
+// Ou especificamente para português brasileiro
+setlocale(LC_ALL, "pt_BR.UTF-8");
+```
+
+## Entrada e Saída de Strings
+
+```c
+#include <stdio.h>
+
+int main() {
+    setlocale(LC_ALL, "pt_BR.UTF-8"); // Habilita caracteres especiais
+    
+    char nome[50];
+    
+    // Leitura segura com fgets
+    printf("Digite seu nome completo: ");
+    fgets(nome, sizeof(nome), stdin);
+    
+    // Remove quebra de linha
+    nome[strcspn(nome, "\n")] = '\0';
+    
+    // Saída com caracteres especiais
+    printf("Olá, %s!\n", nome);
+    
+    return 0;
+}
+```
+
+## Percorrendo e Manipulando Strings
+
+```c
+char texto[] = "Programação em C";
+int i;
+
+// Convertendo para maiúsculas considerando localidade
+for(i = 0; texto[i]; i++) {
+    texto[i] = toupper(texto[i]);
+}
+printf("%s\n", texto); // "PROGRAMAÇÃO EM C"
+```
+
+## Cuidados Avançados
+
+1. **Segurança**: Sempre use versões seguras das funções (strncpy, strncat)
+2. **Localização**: Configure locale para suportar caracteres internacionais
+3. **Alocação**: Para strings dinâmicas, use malloc/free corretamente
+4. **Unicode**: Para suporte completo a caracteres, considere bibliotecas como ICU
+
+## Exemplo Completo Internacionalizado
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <locale.h>
+#include <ctype.h>
+
+int main() {
+    setlocale(LC_ALL, "pt_BR.UTF-8");
+    
+    char nome[50], sobrenome[50], nome_completo[100];
+    
+    printf("Digite seu nome: ");
+    fgets(nome, sizeof(nome), stdin);
+    nome[strcspn(nome, "\n")] = '\0';
+    
+    printf("Digite seu sobrenome: ");
+    fgets(sobrenome, sizeof(sobrenome), stdin);
+    sobrenome[strcspn(sobrenome, "\n")] = '\0';
+    
+    strncpy(nome_completo, nome, sizeof(nome_completo) - 1);
+    strncat(nome_completo, " ", sizeof(nome_completo) - strlen(nome_completo) - 1);
+    strncat(nome_completo, sobrenome, sizeof(nome_completo) - strlen(nome_completo) - 1);
+    
+    printf("Nome completo: %s\n", nome_completo);
+    printf("Tamanho: %zu caracteres\n", strlen(nome_completo));
+    
+    // Comparação considerando acentos
+    if(strcoll(nome_completo, "João Silva") == 0) {
+        printf("Seu nome é João Silva!\n");
+    }
+    
+    return 0;
+}
+```
+
+Este material combinado cobre desde os conceitos básicos até técnicas avançadas de manipulação de strings em C, incluindo internacionalização e boas práticas de segurança.
