@@ -903,3 +903,91 @@ int main() {
 ```
 
 Este material combinado cobre desde os conceitos básicos até técnicas avançadas de manipulação de strings em C, incluindo internacionalização e boas práticas de segurança.
+
+<hr>
+
+##  📘Aula 7: Matrizes e Arrays Multidimensionais
+
+1. **Introdução**
+   Nesta aula, o foco é entender o que são **matrizes (arrays multidimensionais)** em C, como declarar, inicializar e manipular esses dados em programas. A ideia é expandir o uso de arrays simples para estruturas mais complexas que simulam tabelas de dados, como linhas e colunas.
+
+2. **Conceito de Matrizes**
+   Matriz é uma estrutura de dados que armazena valores do mesmo tipo em várias **dimensões**. A mais comum é a **bidimensional**, que representa uma tabela com **linhas** e **colunas**. Em C, arrays multidimensionais são definidos com colchetes indicando cada dimensão:
+
+```c
+int matriz[3][4];  // 3 linhas e 4 colunas
+```
+
+3. **Declaração e Inicialização**
+   Você pode declarar e inicializar uma matriz de forma direta:
+
+```c
+int matriz[2][3] = {
+  {1, 2, 3},
+  {4, 5, 6}
+};
+```
+
+Cada linha da matriz é separada por chaves `{}`, e os valores seguem a ordem das colunas. Também é possível inicializar com uma lista contínua:
+
+```c
+int matriz[2][3] = {1, 2, 3, 4, 5, 6};
+```
+
+4. **Acesso aos Elementos**
+   O acesso é feito informando o **índice da linha** e o **índice da coluna**:
+
+```c
+printf("%d", matriz[0][1]);  // Acessa o elemento da 1ª linha, 2ª coluna (valor 2)
+```
+
+5. **Preenchimento com `for`**
+   Um `for` aninhado é utilizado para percorrer todas as posições da matriz:
+
+```c
+for (int i = 0; i < 2; i++) {
+  for (int j = 0; j < 3; j++) {
+    printf("Elemento [%d][%d] = %d\n", i, j, matriz[i][j]);
+  }
+}
+```
+
+6. **Exemplo Prático**
+   Programa que preenche uma matriz 3x3 com valores digitados pelo usuário:
+
+```c
+int matriz[3][3];
+for (int i = 0; i < 3; i++) {
+  for (int j = 0; j < 3; j++) {
+    printf("Digite o valor para [%d][%d]: ", i, j);
+    scanf("%d", &matriz[i][j]);
+  }
+}
+```
+
+7. **Matrizes com Tipos Diferentes**
+   Matrizes podem ser de qualquer tipo básico: `int`, `float`, `char`. Exemplo com `float`:
+
+```c
+float notas[2][4];
+```
+
+8. **Arrays Tridimensionais (e além)**
+   É possível criar arrays com mais de duas dimensões:
+
+```c
+int cubo[2][3][4];  // 2 "planos", 3 linhas e 4 colunas
+```
+
+Mas seu uso é menos comum e normalmente reservado para aplicações específicas (ex: gráficos 3D, processamento de imagem).
+
+9. **Considerações Importantes**
+
+* A linguagem C **não verifica limites de índice**, então acessar `matriz[10][10]` pode causar erro se o tamanho for menor.
+* Use `#define` ou `const int` para tornar o tamanho da matriz mais legível e fácil de alterar.
+* Matrizes ocupam **muita memória**, principalmente quando grandes, então deve-se evitar declarar matrizes gigantes sem necessidade.
+
+10. **Conclusão**
+    Matrizes são fundamentais para lidar com dados organizados em formato tabular. O domínio do acesso por índices, laços aninhados e boas práticas de declaração ajudam a escrever programas mais organizados, eficientes e preparados para problemas que envolvem tabelas, grades e mais de uma dimensão de informação.
+
+<hr>
