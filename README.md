@@ -991,3 +991,154 @@ Mas seu uso é menos comum e normalmente reservado para aplicações específica
     Matrizes são fundamentais para lidar com dados organizados em formato tabular. O domínio do acesso por índices, laços aninhados e boas práticas de declaração ajudam a escrever programas mais organizados, eficientes e preparados para problemas que envolvem tabelas, grades e mais de uma dimensão de informação.
 
 <hr>
+
+## 📘Aula 8 – Structs (Registros)
+
+## 🧠 O que são Structs?
+
+* Em C, uma `struct` (estrutura) é um tipo de dado definido pelo usuário que agrupa diferentes variáveis sob um mesmo nome.
+* É usada para representar **registros** ou **objetos** com múltiplos atributos.
+* Permite combinar variáveis de tipos diferentes (ex: `int`, `float`, `char[]`) em um único tipo lógico.
+
+## 🧱 Sintaxe Básica
+
+```c
+struct NomeDaStruct {
+    tipo1 nomeVariavel1;
+    tipo2 nomeVariavel2;
+    ...
+};
+```
+
+### Exemplo:
+
+```c
+struct Pessoa {
+    char nome[50];
+    int idade;
+    float altura;
+};
+```
+
+Isso define um novo tipo chamado `struct Pessoa`.
+
+## 🧑‍💻 Como Declarar e Usar Structs
+
+### 1. Declarando Variáveis
+
+```c
+struct Pessoa p1;
+```
+
+### 2. Atribuindo Valores
+
+```c
+strcpy(p1.nome, "João");
+p1.idade = 25;
+p1.altura = 1.75;
+```
+
+### 3. Acessando Campos
+
+Use o operador `.` (ponto):
+
+```c
+printf("Nome: %s\n", p1.nome);
+printf("Idade: %d\n", p1.idade);
+printf("Altura: %.2f\n", p1.altura);
+```
+
+## 📦 Structs com `typedef`
+
+* Permite simplificar o uso da struct:
+
+```c
+typedef struct {
+    char nome[50];
+    int idade;
+    float altura;
+} Pessoa;
+```
+
+Agora podemos declarar variáveis diretamente:
+
+```c
+Pessoa p2;
+```
+
+## 🧬 Structs Aninhadas
+
+Uma `struct` pode conter outra `struct`:
+
+```c
+typedef struct {
+    int dia, mes, ano;
+} Data;
+
+typedef struct {
+    char nome[50];
+    Data nascimento;
+} Pessoa;
+```
+
+Uso:
+
+```c
+Pessoa p3;
+strcpy(p3.nome, "Maria");
+p3.nascimento.dia = 15;
+p3.nascimento.mes = 8;
+p3.nascimento.ano = 1990;
+```
+
+## 📚 Structs em Arrays
+
+Você pode criar vetores de structs:
+
+```c
+Pessoa lista[100];
+```
+
+Acessando:
+
+```c
+strcpy(lista[0].nome, "Carlos");
+lista[0].idade = 30;
+```
+
+## 🔁 Passando Structs para Funções
+
+### Como valor:
+
+```c
+void imprimirPessoa(Pessoa p) {
+    printf("%s - %d anos\n", p.nome, p.idade);
+}
+```
+
+### Como ponteiro (mais eficiente):
+
+```c
+void atualizarIdade(Pessoa *p, int novaIdade) {
+    p->idade = novaIdade;
+}
+```
+
+Uso:
+
+```c
+atualizarIdade(&p1, 28);
+```
+
+## ✅ Vantagens de Usar Structs
+
+* Organiza dados complexos.
+* Facilita modularização de programas.
+* Prepara para programação orientada a objetos (em C++).
+
+---
+
+## ✅ Conclusão
+
+Structs são fundamentais para agrupar dados relacionados de forma organizada. Elas são especialmente úteis quando trabalhamos com registros reais, como informações de uma pessoa, produto ou livro. Usá-las corretamente torna o código mais limpo, modular e fácil de entender.
+
