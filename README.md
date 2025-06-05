@@ -1141,4 +1141,133 @@ atualizarIdade(&p1, 28);
 ## ✅ Conclusão
 
 Structs são fundamentais para agrupar dados relacionados de forma organizada. Elas são especialmente úteis quando trabalhamos com registros reais, como informações de uma pessoa, produto ou livro. Usá-las corretamente torna o código mais limpo, modular e fácil de entender.
+ 
+<hr>
+
+## 📘Aula 9.1: Funções e Procedimentos
+
+## O que são Funções e Procedimentos?
+
+Em C, tanto funções quanto procedimentos são blocos de código que realizam tarefas específicas. A diferença principal é:
+
+- **Funções**: Retornam um valor
+- **Procedimentos**: Não retornam valor (usam o tipo `void`)
+
+Na verdade, em C tecnicamente todas são funções, mas chamamos de "procedimentos" aquelas que não retornam valores.
+
+## Estrutura de uma Função
+
+```c
+tipo_de_retorno nome_da_funcao(parametros) {
+    // Corpo da função
+    // Instruções
+    return valor; // Para funções não void
+}
+```
+
+## Exemplo de Função (com retorno)
+
+```c
+// Função que calcula o quadrado de um número
+int quadrado(int num) {
+    return num * num;
+}
+
+// Uso:
+int resultado = quadrado(5); // resultado = 25
+```
+
+## Exemplo de Procedimento (sem retorno)
+
+```c
+// Procedimento que imprime uma mensagem
+void imprimirMensagem() {
+    printf("Olá, mundo!\n");
+}
+
+// Uso:
+imprimirMensagem(); // Imprime "Olá, mundo!"
+```
+
+## Parâmetros e Argumentos
+
+- **Parâmetros**: Variáveis declaradas na assinatura da função
+- **Argumentos**: Valores passados quando a função é chamada
+
+```c
+// Declaração com parâmetros
+int soma(int a, int b) {
+    return a + b;
+}
+
+// Chamada com argumentos
+int total = soma(3, 4); // total = 7
+```
+
+## Escopo de Variáveis
+
+- Variáveis declaradas dentro de funções são **locais** (só existem dentro da função)
+- Variáveis declaradas fora de funções são **globais** (acessíveis em todo o programa)
+
+```c
+int global = 10; // Variável global
+
+void teste() {
+    int local = 5; // Variável local
+    printf("%d, %d\n", global, local);
+}
+```
+
+## Protótipos de Função
+
+É boa prática declarar protótipos antes da função main():
+
+```c
+// Protótipos
+int quadrado(int num);
+void imprimirMensagem();
+
+int main() {
+    // Corpo principal
+    return 0;
+}
+
+// Implementações depois
+int quadrado(int num) { /* ... */ }
+void imprimirMensagem() { /* ... */ }
+```
+
+## Exemplo Completo
+
+```c
+#include <stdio.h>
+
+// Protótipos
+int calcularAreaRetangulo(int base, int altura);
+void imprimirResultado(int area);
+
+int main() {
+    int b = 5, h = 3;
+    int area = calcularAreaRetangulo(b, h);
+    imprimirResultado(area);
+    return 0;
+}
+
+// Função que calcula área
+int calcularAreaRetangulo(int base, int altura) {
+    return base * altura;
+}
+
+// Procedimento que imprime resultado
+void imprimirResultado(int area) {
+    printf("A área do retângulo é: %d\n", area);
+}
+```
+
+## Benefícios de Usar Funções
+
+1. **Reutilização de código**: Escreva uma vez, use muitas
+2. **Modularidade**: Divida problemas complexos em partes menores
+3. **Facilidade de manutenção**: Corrija em um só lugar
+4. **Legibilidade**: Código mais organizado e compreensível
 
