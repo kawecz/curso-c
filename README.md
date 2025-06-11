@@ -1271,3 +1271,131 @@ void imprimirResultado(int area) {
 3. **Facilidade de manutenção**: Corrija em um só lugar
 4. **Legibilidade**: Código mais organizado e compreensível
 
+<hr>
+
+ ## 📘Aula 9.2 - Trabalhando com vários arquivos - Projeto de código
+
+---
+
+### 🔹 **1. Função `main()` – Estrutura e Parâmetros**
+
+A função `main()` é o ponto de entrada de qualquer programa C. Quando o programa é executado pelo terminal, ele pode receber **argumentos da linha de comando**:
+
+```c
+int main(int argc, char *argv[]) {
+    // código
+}
+```
+
+* **`argc` (Argument Count):** Número de argumentos passados ao programa (inclui o nome do programa).
+* **`argv` (Argument Vector):** Vetor de strings (`char*`) contendo cada argumento como texto.
+
+**Exemplo de uso:**
+
+```c
+// comando no terminal:
+./meu_programa entrada.txt
+
+// dentro do main:
+printf("Arquivo passado: %s\n", argv[1]);
+```
+
+---
+
+### 🔹 **2. Arquivos-Fonte em C: Separação de Código**
+
+#### **.c** – Arquivos de implementação
+
+Contêm o código-fonte principal (funções, lógica do programa).
+
+#### **.h** – Arquivos de cabeçalho
+
+Declaram funções, constantes e tipos a serem usados em vários arquivos.
+
+---
+
+### 🔹 **3. Estrutura de um Projeto em Múltiplos Arquivos**
+
+**Exemplo de Projeto:**
+
+```
+meu_projeto/
+│
+├── main.c         // Função main
+├── calculo.c      // Implementação de funções auxiliares
+├── calculo.h      // Declarações das funções de calculo
+└── Makefile       // Automatiza a compilação
+```
+
+---
+
+### 🔹 **4. Exemplo Prático**
+
+#### **Arquivo: `calculo.h`**
+
+```c
+#ifndef CALCULO_H
+#define CALCULO_H
+
+int soma(int a, int b);
+int multiplica(int a, int b);
+
+#endif
+```
+
+#### **Arquivo: `calculo.c`**
+
+```c
+#include "calculo.h"
+
+int soma(int a, int b) {
+    return a + b;
+}
+
+int multiplica(int a, int b) {
+    return a * b;
+}
+```
+
+#### **Arquivo: `main.c`**
+
+```c
+#include <stdio.h>
+#include "calculo.h"
+
+int main(int argc, char *argv[]) {
+    int x = 3, y = 4;
+    printf("Soma: %d\n", soma(x, y));
+    printf("Multiplicação: %d\n", multiplica(x, y));
+    return 0;
+}
+```
+
+---
+
+### 🔹 **5. Compilação de Vários Arquivos**
+
+Você pode compilar múltiplos arquivos com:
+
+```bash
+gcc main.c calculo.c -o programa
+```
+
+Ou automatizar com um **Makefile**.
+
+---
+
+### ❌ **Erros Comuns**
+
+* Esquecer de usar `#include "arquivo.h"` nos arquivos que precisam das declarações.
+* Repetir definição de função em mais de um arquivo `.c`.
+* Não usar `#ifndef / #define` para proteger múltiplas inclusões de headers.
+* Esquecer de compilar todos os arquivos `.c` juntos.
+
+---
+
+### 📚 **Conclusão**
+
+Projetos C organizados em múltiplos arquivos melhoram a legibilidade e reutilização de código. Usar corretamente `main(int argc, char *argv[])` permite flexibilidade na execução via terminal. Separar cabeçalhos (`.h`) e implementações (`.c`) é uma prática profissional essencial.
+
+
